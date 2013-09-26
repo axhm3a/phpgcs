@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<phpunit bootstrap="bootstrap.php">
+    <testsuites>
+        <testsuite>
+            <directory suffix="Test.php">./Phpgcs</directory>
+        </testsuite>
+
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../Phpgcs/</directory>
+        </whitelist>
+    </filter>
+
+</phpunit>
