@@ -26,7 +26,7 @@
  */
 
 require_once('SplClassLoader.php');
-$loader = new SplClassLoader('Phpgcs');
+$loader = new SplClassLoader('Axhm3a');
 $loader->register();
 
 $ignoredPaths = array();
