@@ -75,7 +75,7 @@ class ConstantGuesser
             // ->
             // \
             if (isset($tokenStream[$key -1 ])
-                && in_array($tokenStream[$key -1 ][0],[T_PAAMAYIM_NEKUDOTAYIM, T_OBJECT_OPERATOR, T_NS_SEPARATOR] )
+                && in_array($tokenStream[$key -1 ][0],array(T_PAAMAYIM_NEKUDOTAYIM, T_OBJECT_OPERATOR, T_NS_SEPARATOR) )
             ) {
                 continue;
             }
@@ -83,7 +83,7 @@ class ConstantGuesser
             // USE
             // CONST
             if (isset($tokenStream[$key -2 ])
-                && in_array($tokenStream[$key -2 ][0],[T_NAMESPACE, T_USE,T_CONST, T_NEW, T_AS, T_INSTANCEOF, T_EXTENDS, T_IMPLEMENTS] )
+                && in_array($tokenStream[$key -2 ][0],array(T_NAMESPACE, T_USE,T_CONST, T_NEW, T_AS, T_INSTANCEOF, T_EXTENDS, T_IMPLEMENTS) )
             ) {
                continue;
             }
@@ -91,7 +91,7 @@ class ConstantGuesser
             // (
             // ::
             if (isset($tokenStream[$key +1 ])
-                && (in_array($tokenStream[$key +1 ][0],[T_WHITESPACE,T_PAAMAYIM_NEKUDOTAYIM,T_NAMESPACE,T_NS_SEPARATOR] )
+                && (in_array($tokenStream[$key +1 ][0],array(T_WHITESPACE,T_PAAMAYIM_NEKUDOTAYIM,T_NAMESPACE,T_NS_SEPARATOR) )
                 || $tokenStream[$key +1] === "(")
             ) {
                 continue;
