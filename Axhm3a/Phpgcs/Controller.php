@@ -46,7 +46,7 @@ class Controller
                 throw new Exception('no path specified');
             }
 
-            $files = [];
+            $files = array();
             $Directory = new \RecursiveDirectoryIterator($path);
             $Iterator = new \RecursiveIteratorIterator($Directory);
             $Regex = new \RegexIterator($Iterator, '/^.+(\.php|\.phtml)$/i', \RecursiveRegexIterator::GET_MATCH);
@@ -56,7 +56,7 @@ class Controller
             }
 
             $constantGuesser = new ConstantGuesser();
-            $filesWithConstants = [];
+            $filesWithConstants = array();
 
             if($showPhpInternalConstants === true) {
                 $ignoredConstants = array_merge($ignoredConstants,array_keys(get_defined_constants()));

@@ -47,9 +47,9 @@ class ConstantGuesser
      * @param array $ignoredConstants
      * @return Constant[]
      */
-    public function scan($code, $ignoredConstants = [])
+    public function scan($code, $ignoredConstants = array())
     {
-        $constants = [];
+        $constants = array();
 
         $tokenStream = token_get_all($code);
 
