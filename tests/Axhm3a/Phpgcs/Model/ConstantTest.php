@@ -27,13 +27,13 @@
 class ConstantTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Phpgcs\Model\Constant
+     * @var \Axhm3a\Phpgcs\Model\Constant
      */
     private $constant;
 
     protected function setUp()
     {
-        $this->constant = new \Phpgcs\Model\Constant();
+        $this->constant = new \Axhm3a\Phpgcs\Model\Constant();
     }
 
     protected function tearDown()

@@ -2,13 +2,13 @@
 <phpunit bootstrap="bootstrap.php">
     <testsuites>
         <testsuite>
-            <directory suffix="Test.php">./Phpgcs</directory>
+            <directory suffix="Test.php">./Axhm3a/Phpgcs</directory>
         </testsuite>
 
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">../Phpgcs/</directory>
+            <directory suffix=".php">../Axhm3a/Phpgcs/</directory>
         </whitelist>
     </filter>
 

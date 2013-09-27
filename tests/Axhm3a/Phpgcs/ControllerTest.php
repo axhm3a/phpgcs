@@ -24,57 +24,33 @@
  *  THE SOFTWARE.
  */
 
-class ConstantGuesserTest extends \PHPUnit_Framework_TestCase
+class ControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Phpgcs\ConstantGuesser
+     * @var Axhm3a\Phpgcs\Controller
      */
-    private $constantGuesser;
+    private $controller;
 
     protected function setUp()
     {
-        $this->constantGuesser = new \Phpgcs\ConstantGuesser();
+        $this->controller = new \Axhm3a\Phpgcs\Controller();
     }
 
     protected function tearDown()
     {
-        $this->constantGuesser = null;
+        $this->controller = null;
     }
 
-
-    public function testEmptyFile()
+    public function testNoPathExcpetionOutput()
     {
-        $this->assertEmpty(
-            $this->constantGuesser->scan("")
-        );
-    }
+        $expected = <<<EXPECTED
+Usage: phpgcs PATH [PHP_CONSTANTS 1/0] [IGNORED_CONSTANT,...] [IGNORED_PATH,...]
 
-    public function testStaticFile()
-    {
-        $result = $this->constantGuesser->scan("HTML_MAILS");
-        $this->assertEmpty($result);
-    }
+[31m[no path specified][0m
 
-    public function testScript()
-    {
-        $result = $this->constantGuesser->scan("<? HTML_MAILS");
 
-        $this->assertEquals(1,$result[0]->getLine());
-        $this->assertEquals('HTML_MAILS',$result[0]->getName());
-    }
+EXPECTED;
 
-    public function testFixture()
-    {
-        $code = file_get_contents(realpath(dirname(__FILE__) . '/Fixture.php'));
-        $result = $this->constantGuesser->scan($code);
-        $this->assertEquals(3,count($result));
-    }
-
-    public function testFixtureWithoutPhpInternals()
-    {
-        $code = file_get_contents(realpath(dirname(__FILE__) . '/Fixture.php'));
-        $result = $this->constantGuesser->scan($code,array('PHP_EOF'));
-       // var_dump($result);
-        $this->assertEquals(2,count($result));
+        $this->assertEquals($expected,(string)$this->controller->run('', true, array(), array()));
     }
 }

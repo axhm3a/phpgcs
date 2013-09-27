@@ -24,9 +24,9 @@
  *  THE SOFTWARE.
  */
 
-namespace Phpgcs;
+namespace Axhm3a\Phpgcs;
 
-use Phpgcs\Model\Constant;
+use Axhm3a\Phpgcs\Model\Constant;
 
 class ConstantGuesser
 {

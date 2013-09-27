@@ -24,49 +24,33 @@
  *  THE SOFTWARE.
  */
 
-namespace Phpgcs\View;
+namespace Axhm3a\Phpgcs\View;
 
-use Phpgcs\Model\File;
 
-class ConsoleView extends View
+use Axhm3a\Phpgcs\Exception;
+
+class ErrorView extends View
 {
     /**
-     * @var File[]
+     * @var Exception
      */
-    private $files;
-
-    /**
-     * @param \Phpgcs\Model\File[] $files
-     */
-    public function setFiles(array $files)
-    {
-        $this->files = $files;
-    }
+    private $exception;
 
     /**
      * @return string
      */
     public function __toString()
     {
-        $output = '';
-
-        $countFiles = 0;
-        $countUsages = 0;
-
-        foreach ($this->files as $file) {
-            $countFiles += 1;
-            $output .= $file->getPath() . "\n";
-
-            foreach ($file->getConstants() as $constant) {
-                $countUsages += 1;
-                $output .= "\t" . $constant->getLine() . ":\t" . $constant->getName() . "\n";
-            }
-        }
-
-        $output .= "\n$countUsages Usage(s) in $countFiles File(s).\n\n";
+        $output =  "Usage: phpgcs PATH [PHP_CONSTANTS 1/0] [IGNORED_CONSTANT,...] [IGNORED_PATH,...]";
+        $output .= "\n\n";
+        $output .= "\033[31m" . $this->exception . "\033[0m";
+        $output .= "\n\n";
 
         return $output;
     }
 
-
+    public function setExcpetion(Exception $exception)
+    {
+        $this->exception = $exception;
+    }
 }

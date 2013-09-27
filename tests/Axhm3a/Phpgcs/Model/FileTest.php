@@ -24,13 +24,33 @@
  *  THE SOFTWARE.
  */
 
-namespace Phpgcs\View;
-
-
-abstract class View
+class FileTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @return string
+     * @var \Axhm3a\Phpgcs\Model\File
      */
-    abstract public function __toString();
+    private $file;
+
+    protected function setUp()
+    {
+        $this->file = new \Axhm3a\Phpgcs\Model\File();
+    }
+
+    protected function tearDown()
+    {
+        $this->file = null;
+    }
+
+    public function testConstants()
+    {
+        $this->file->setConstants(array('foo' => 'bar'));
+
+        $this->assertEquals(array('foo' => 'bar'), $this->file->getConstants());
+    }
+
+    public function testPath()
+    {
+        $this->file->setPath('foo');
+        $this->assertEquals('foo', $this->file->getPath());
+    }
 }

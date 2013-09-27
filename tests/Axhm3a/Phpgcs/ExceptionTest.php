@@ -24,49 +24,11 @@
  *  THE SOFTWARE.
  */
 
-namespace Phpgcs\Model;
-
-class File
+class ExceptionTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var Constant[]
-     */
-    private $constants = array();
-
-    /**
-     * @var string
-     */
-    private $path;
-
-    /**
-     * @param string $path
-     */
-    public function setPath($path)
+    public function testException()
     {
-        $this->path = $path;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param Constant[] $constants
-     */
-    public function setConstants($constants)
-    {
-        $this->constants = $constants;
-    }
-
-    /**
-     * @return Constant[]
-     */
-    public function getConstants()
-    {
-        return $this->constants;
+        $excpetion = new Axhm3a\Phpgcs\Exception('Foo');
+        $this->assertEquals('[Foo]', (string)$excpetion);
     }
 }

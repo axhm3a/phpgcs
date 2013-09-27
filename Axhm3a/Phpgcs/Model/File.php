@@ -24,49 +24,49 @@
  *  THE SOFTWARE.
  */
 
-namespace Phpgcs\Model;
+namespace Axhm3a\Phpgcs\Model;
 
-class Constant
+class File
 {
     /**
-     * @var int
+     * @var Constant[]
      */
-    private $line;
+    private $constants = array();
 
     /**
      * @var string
      */
-    private $name;
+    private $path;
 
     /**
-     * @param int $line
+     * @param string $path
      */
-    public function setLine($line)
+    public function setPath($path)
     {
-        $this->line = $line;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLine()
-    {
-        return $this->line;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+        $this->path = $path;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getPath()
     {
-        return $this->name;
+        return $this->path;
+    }
+
+    /**
+     * @param Constant[] $constants
+     */
+    public function setConstants($constants)
+    {
+        $this->constants = $constants;
+    }
+
+    /**
+     * @return Constant[]
+     */
+    public function getConstants()
+    {
+        return $this->constants;
     }
 }
