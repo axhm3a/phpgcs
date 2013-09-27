@@ -57,7 +57,7 @@ class ConstantGuesserTest extends \PHPUnit_Framework_TestCase
 
     public function testScript()
     {
-        $result = $this->constantGuesser->scan("<? HTML_MAILS");
+        $result = $this->constantGuesser->scan("<?php HTML_MAILS");
 
         $this->assertEquals(1,$result[0]->getLine());
         $this->assertEquals('HTML_MAILS',$result[0]->getName());
