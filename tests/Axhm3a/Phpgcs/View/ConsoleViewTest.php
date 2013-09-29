@@ -27,13 +27,13 @@
 class ConsoleViewTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Phpgcs\View\ConsoleView
+     * @var \Axhm3a\Phpgcs\View\ConsoleView
      */
     private $view;
 
     protected function setUp()
     {
-        $this->view = new \Phpgcs\View\ConsoleView();
+        $this->view = new \Axhm3a\Phpgcs\View\ConsoleView();
     }
 
     protected function tearDown()
@@ -57,7 +57,7 @@ EXPECTED;
 
     public function testOneFileTwoConstants()
     {
-        $constantOne = $this->getMock('\Phpgcs\Model\Constant');
+        $constantOne = $this->getMock('\Axhm3a\Phpgcs\Model\Constant');
 
         $constantOne->expects($this->once())
             ->method('getName')
@@ -66,7 +66,7 @@ EXPECTED;
             ->method('getLine')
             ->will($this->returnValue(1));
 
-        $constantTwo = $this->getMock('\Phpgcs\Model\Constant');
+        $constantTwo = $this->getMock('\Axhm3a\Phpgcs\Model\Constant');
 
         $constantTwo->expects($this->once())
             ->method('getName')
@@ -76,7 +76,7 @@ EXPECTED;
             ->method('getLine')
             ->will($this->returnValue(2));
 
-        $file = $this->getMock('\Phpgcs\Model\File');
+        $file = $this->getMock('\Axhm3a\Phpgcs\Model\File');
         $file->expects($this->once())
             ->method('getConstants')
             ->will($this->returnValue(

@@ -24,11 +24,49 @@
  *  THE SOFTWARE.
  */
 
-namespace Phpgcs;
+namespace Axhm3a\Phpgcs\Model;
 
-class Exception extends \Exception
+class Constant
 {
-    function __toString() {
-        return "[" . $this->getMessage() . "]";
+    /**
+     * @var int
+     */
+    private $line;
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @param int $line
+     */
+    public function setLine($line)
+    {
+        $this->line = $line;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLine()
+    {
+        return $this->line;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

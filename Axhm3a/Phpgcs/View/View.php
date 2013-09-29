@@ -24,33 +24,13 @@
  *  THE SOFTWARE.
  */
 
-namespace Phpgcs\View;
+namespace Axhm3a\Phpgcs\View;
 
 
-use Phpgcs\Exception;
-
-class ErrorView extends View
+abstract class View
 {
-    /**
-     * @var Exception
-     */
-    private $exception;
-
     /**
      * @return string
      */
-    public function __toString()
-    {
-        $output =  "Usage: phpgcs PATH [PHP_CONSTANTS 1/0] [IGNORED_CONSTANT,...] [IGNORED_PATH,...]";
-        $output .= "\n\n";
-        $output .= "\033[31m" . $this->exception . "\033[0m";
-        $output .= "\n\n";
-
-        return $output;
-    }
-
-    public function setExcpetion(Exception $exception)
-    {
-        $this->exception = $exception;
-    }
+    abstract public function __toString();
 }

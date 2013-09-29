@@ -24,11 +24,12 @@
  *  THE SOFTWARE.
  */
 
-namespace Phpgcs;
+namespace Axhm3a\Phpgcs;
 
-use Phpgcs\Model\File;
-use Phpgcs\View\ConsoleView;
-use Phpgcs\View\ErrorView;
+use Axhm3a\Phpgcs\Model\File;
+use Axhm3a\Phpgcs\View\ConsoleView;
+use Axhm3a\Phpgcs\View\ErrorView;
+use Axhm3a\Phpgcs\View\View;
 
 class Controller
 {
@@ -36,7 +37,7 @@ class Controller
      * @param string $path
      * @param int $showPhpInternalConstants
      * @param array $ignoredConstants
-     * @return View\View
+     * @return View
      */
     public function run($path, $showPhpInternalConstants, array $ignoredConstants, array $ignoredPaths)
     {
@@ -45,7 +46,7 @@ class Controller
                 throw new Exception('no path specified');
             }
 
-            $files = [];
+            $files = array();
             $Directory = new \RecursiveDirectoryIterator($path);
             $Iterator = new \RecursiveIteratorIterator($Directory);
             $Regex = new \RegexIterator($Iterator, '/^.+(\.php|\.phtml)$/i', \RecursiveRegexIterator::GET_MATCH);
@@ -55,7 +56,7 @@ class Controller
             }
 
             $constantGuesser = new ConstantGuesser();
-            $filesWithConstants = [];
+            $filesWithConstants = array();
 
             if($showPhpInternalConstants === true) {
                 $ignoredConstants = array_merge($ignoredConstants,array_keys(get_defined_constants()));

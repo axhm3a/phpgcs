@@ -24,11 +24,49 @@
  *  THE SOFTWARE.
  */
 
-class ExceptionTest extends \PHPUnit_Framework_TestCase
+namespace Axhm3a\Phpgcs\View;
+
+use Axhm3a\Phpgcs\Model\File;
+
+class ConsoleView extends View
 {
-    public function testException()
+    /**
+     * @var File[]
+     */
+    private $files;
+
+    /**
+     * @param \Axhm3a\Phpgcs\Model\File[] $files
+     */
+    public function setFiles(array $files)
     {
-        $excpetion = new Phpgcs\Exception('Foo');
-        $this->assertEquals('[Foo]', (string)$excpetion);
+        $this->files = $files;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $output = '';
+
+        $countFiles = 0;
+        $countUsages = 0;
+
+        foreach ($this->files as $file) {
+            $countFiles += 1;
+            $output .= $file->getPath() . "\n";
+
+            foreach ($file->getConstants() as $constant) {
+                $countUsages += 1;
+                $output .= "\t" . $constant->getLine() . ":\t" . $constant->getName() . "\n";
+            }
+        }
+
+        $output .= "\n$countUsages Usage(s) in $countFiles File(s).\n\n";
+
+        return $output;
+    }
+
+
 }

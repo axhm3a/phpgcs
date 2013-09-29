@@ -24,33 +24,11 @@
  *  THE SOFTWARE.
  */
 
-class FileTest extends \PHPUnit_Framework_TestCase
+namespace Axhm3a\Phpgcs;
+
+class Exception extends \Exception
 {
-    /**
-     * @var \Phpgcs\Model\File
-     */
-    private $file;
-
-    protected function setUp()
-    {
-        $this->file = new \Phpgcs\Model\File();
-    }
-
-    protected function tearDown()
-    {
-        $this->file = null;
-    }
-
-    public function testConstants()
-    {
-        $this->file->setConstants(array('foo' => 'bar'));
-
-        $this->assertEquals(array('foo' => 'bar'), $this->file->getConstants());
-    }
-
-    public function testPath()
-    {
-        $this->file->setPath('foo');
-        $this->assertEquals('foo', $this->file->getPath());
+    function __toString() {
+        return "[" . $this->getMessage() . "]";
     }
 }

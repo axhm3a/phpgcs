@@ -26,5 +26,5 @@
 
 require_once realpath(dirname(__FILE__) . '/../SplClassLoader.php');
 
-$loader = new SplClassLoader('Phpgcs',dirname(__FILE__) . '/../');
+$loader = new SplClassLoader('Axhm3a',dirname(__FILE__) . '/../');
 $loader->register();
