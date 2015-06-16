@@ -25,9 +25,8 @@
  *  THE SOFTWARE.
  */
 
-require_once('SplClassLoader.php');
-$loader = new SplClassLoader('Axhm3a');
-$loader->register();
+require_once('vendor/autoload.php');
+
 
 $ignoredPaths = array();
 
