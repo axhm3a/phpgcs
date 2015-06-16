@@ -44,13 +44,11 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
     public function testNoPathExcpetionOutput()
     {
         $expected = <<<EXPECTED
-Usage: phpgcs PATH [PHP_CONSTANTS 1/0] [IGNORED_CONSTANT,...] [IGNORED_PATH,...]
-
 [31m[no path specified][0m
 
 
 EXPECTED;
 
-        $this->assertEquals($expected,(string)$this->controller->run('', true, array(), array()));
+        $this->assertStringEndsWith($expected,(string)$this->controller->run('', true, array(), array()));
     }
 }

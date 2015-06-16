@@ -41,7 +41,15 @@ class ErrorView extends View
      */
     public function __toString()
     {
-        $output =  "Usage: phpgcs PATH [PHP_CONSTANTS 1/0] [IGNORED_CONSTANT,...] [IGNORED_PATH,...]";
+        $output =  "Usage: phpgcs [switches] [PATH]\n";
+        $output .= "\n--ignore-builtin\n";
+        $output .= "\tignores pre defined constants like PHP_EOL, LOCK_EX...\n";
+        $output .= "\n--ignore-const\n";
+        $output .= "\tlist of constants to be ignored\n";
+        $output .= "\t--ignore-const=CONST1,CONST2,...";
+        $output .= "\n--exclude-path\n";
+        $output .= "\tlist of path patterns to be excluded\n";
+        $output .= "\t--exclude-path=.phtml,tests/,...";
         $output .= "\n\n";
         $output .= "\033[31m" . $this->exception . "\033[0m";
         $output .= "\n\n";
