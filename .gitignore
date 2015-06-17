@@ -2,3 +2,5 @@
 atlassian-ide-plugin.xml
 tests/log
 tests/phpunit.xml
+vendor
+phpunit.xml
