@@ -29,7 +29,10 @@ class CliTest extends PHPUnit_Framework_TestCase
     {
         $cliMock = $this->getMock('\Axhm3a\Phpgcs\Cli');
         $cliMock->expects($this->once())->method("execute")->with(
-            "", false, array(), array()
+            "",
+            false,
+            array(),
+            array()
         );
         CliMock::setCliMock($cliMock);
 
@@ -40,22 +43,42 @@ class CliTest extends PHPUnit_Framework_TestCase
     {
         $cliMock = $this->getMock('\Axhm3a\Phpgcs\Cli');
         $cliMock->expects($this->once())->method("execute")->with(
-            ".", false, array(), array()
+            ".",
+            false,
+            array(),
+            array()
         );
         CliMock::setCliMock($cliMock);
 
-        CliMock::run(array(null,"."));
+        CliMock::run(
+            array(
+                null,
+                "."
+            )
+        );
     }
 
     public function testCliWithAllParameters()
     {
         $cliMock = $this->getMock('\Axhm3a\Phpgcs\Cli');
         $cliMock->expects($this->once())->method("execute")->with(
-            ".", true, array("FOO","BAR"), array(".phtml", "tests/")
+            ".",
+            true,
+            array("FOO","BAR"),
+            array(".phtml", "tests/")
         );
+
         CliMock::setCliMock($cliMock);
 
-        CliMock::run(array(null,".", "--ignore-builtin","--ignore-const=FOO,BAR", "--exclude-paths=.phtml,tests/"));
+        CliMock::run(
+            array(
+                null,
+                ".",
+                "--ignore-builtin",
+                "--ignore-const=FOO,BAR",
+                "--exclude-paths=.phtml,tests/"
+            )
+        );
     }
 }
 
