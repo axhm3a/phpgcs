@@ -1,12 +1,12 @@
 {
-  "name": "vendor_name/package_name",
-  "description": "description_text",
+  "name": "axhm3a/phpgcs",
+  "description": "gloabal constant scanner",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "mit",
   "authors": [
     {
-      "name": "author's name",
-      "email": "email@example.com"
+      "name": "Daniel Basten",
+      "email": "axhm3a@gmail.com"
     }
   ],
   "require-dev" : {
