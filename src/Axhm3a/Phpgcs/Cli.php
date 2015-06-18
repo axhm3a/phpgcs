@@ -32,7 +32,8 @@ namespace Axhm3a\Phpgcs;
  */
 class Cli extends Controller
 {
-    public static function run(array $argv) {
+    public static function run(array $argv)
+    {
         $ignoredPaths = array();
         $controller = new Controller();
 
