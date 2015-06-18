@@ -1,14 +1,15 @@
 {
   "name": "axhm3a/phpgcs",
-  "description": "gloabal constant scanner",
-  "minimum-stability": "stable",
-  "license": "mit",
+  "description": "tool that seeks for usage of global constants in php scripts",
+  "license": "MIT",
   "authors": [
     {
       "name": "Daniel Basten",
-      "email": "axhm3a@gmail.com"
+      "email": "axhm3a@gmail.com",
+      "role": "Maintainer"
     }
   ],
+  "minimum-stability": "stable",
   "require-dev" : {
     "phpunit/phpunit" : "v4.7.3",
     "mikey179/vfsStream": "~1.4"
