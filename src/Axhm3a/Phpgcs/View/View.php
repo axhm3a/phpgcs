@@ -27,10 +27,10 @@
 namespace Axhm3a\Phpgcs\View;
 
 
-abstract class View
+interface View
 {
     /**
      * @return string
      */
-    abstract public function __toString();
+    public function __toString();
 }

@@ -28,7 +28,7 @@ namespace Axhm3a\Phpgcs\View;
 
 use Axhm3a\Phpgcs\Model\File;
 
-class ConsoleView extends View
+class ConsoleView implements  View
 {
     /**
      * @var File[]

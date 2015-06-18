@@ -29,7 +29,7 @@ namespace Axhm3a\Phpgcs\View;
 
 use Axhm3a\Phpgcs\Exception;
 
-class ErrorView extends View
+class ErrorView implements View
 {
     /**
      * @var Exception
