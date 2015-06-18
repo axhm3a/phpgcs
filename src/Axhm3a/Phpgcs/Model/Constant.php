@@ -3,7 +3,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,49 +24,49 @@
  *  THE SOFTWARE.
  */
 
-namespace Axhm3a\Phpgcs\View;
+namespace Axhm3a\Phpgcs\Model;
 
-use Axhm3a\Phpgcs\Model\File;
-
-class ConsoleView extends View
+class Constant
 {
     /**
-     * @var File[]
+     * @var int
      */
-    private $files;
+    private $line;
 
     /**
-     * @param \Axhm3a\Phpgcs\Model\File[] $files
+     * @var string
      */
-    public function setFiles(array $files)
+    private $name;
+
+    /**
+     * @param int $line
+     */
+    public function setLine($line)
     {
-        $this->files = $files;
+        $this->line = $line;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLine()
+    {
+        return $this->line;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function __toString()
+    public function getName()
     {
-        $output = '';
-
-        $countFiles = 0;
-        $countUsages = 0;
-
-        foreach ($this->files as $file) {
-            $countFiles += 1;
-            $output .= $file->getPath() . "\n";
-
-            foreach ($file->getConstants() as $constant) {
-                $countUsages += 1;
-                $output .= "\t" . $constant->getLine() . ":\t" . $constant->getName() . "\n";
-            }
-        }
-
-        $output .= "\n$countUsages Usage(s) in $countFiles File(s).\n\n";
-
-        return $output;
+        return $this->name;
     }
-
-
 }

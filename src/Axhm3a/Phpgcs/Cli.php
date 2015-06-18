@@ -1,9 +1,8 @@
 <?php
-
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,49 +23,51 @@
  *  THE SOFTWARE.
  */
 
-namespace Axhm3a\Phpgcs\Model;
+namespace Axhm3a\Phpgcs;
 
-class Constant
+/**
+ * Class Cli
+ * Entrypoint for Cli-Application
+ * @package Axhm3a\Phpgcs
+ */
+class Cli extends Controller
 {
-    /**
-     * @var int
-     */
-    private $line;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @param int $line
-     */
-    public function setLine($line)
+    public static function run(array $argv)
     {
-        $this->line = $line;
+        return static::create()->execute(
+            (isset($argv[1]) ? (string)$argv[1] : '') ,
+            self::checkParameter($argv, 2, '--ignore-builtin'),
+            self::checkParameter($argv, 3, '--ignore-const') ? explode(',', self::getValuesFromParam($argv[3])) : array(),
+            self::checkParameter($argv, 4, '--exclude-paths') ? explode(',', self::getValuesFromParam($argv[4])): array()
+        );
     }
 
     /**
-     * @return int
+     * @return Controller
      */
-    public function getLine()
+    protected static function create()
     {
-        return $this->line;
+        $controller = new Controller();
+        return $controller;
+    }
+
+
+    /**
+     * @param string $parameter
+     * @return mixed
+     */
+    protected static function getValuesFromParam($parameter)
+    {
+        $array = explode('=', $parameter);
+        return $array[1];
     }
 
     /**
-     * @param string $name
+     * @param array $argv
+     * @return bool
      */
-    public function setName($name)
+    protected static function checkParameter(array $argv, $index, $parameterName)
     {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
+        return (isset($argv[$index]) && strpos($argv[$index], $parameterName) === 0);
     }
 }

@@ -3,7 +3,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,49 +24,41 @@
  *  THE SOFTWARE.
  */
 
-namespace Axhm3a\Phpgcs\Model;
+namespace Axhm3a\Phpgcs\View;
 
-class File
+
+use Axhm3a\Phpgcs\Exception;
+
+class ErrorView implements View
 {
     /**
-     * @var Constant[]
+     * @var Exception
      */
-    private $constants = array();
-
-    /**
-     * @var string
-     */
-    private $path;
-
-    /**
-     * @param string $path
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-    }
+    private $exception;
 
     /**
      * @return string
      */
-    public function getPath()
+    public function __toString()
     {
-        return $this->path;
+        $output =  "Usage: phpgcs [switches] [PATH]\n";
+        $output .= "\n--ignore-builtin\n";
+        $output .= "\tignores pre defined constants like PHP_EOL, LOCK_EX...\n";
+        $output .= "\n--ignore-const\n";
+        $output .= "\tlist of constants to be ignored\n";
+        $output .= "\t--ignore-const=CONST1,CONST2,...";
+        $output .= "\n--exclude-path\n";
+        $output .= "\tlist of path patterns to be excluded\n";
+        $output .= "\t--exclude-paths=.phtml,tests/,...";
+        $output .= "\n\n";
+        $output .= "\033[31m" . $this->exception . "\033[0m";
+        $output .= "\n\n";
+
+        return $output;
     }
 
-    /**
-     * @param Constant[] $constants
-     */
-    public function setConstants($constants)
+    public function setExcpetion(Exception $exception)
     {
-        $this->constants = $constants;
-    }
-
-    /**
-     * @return Constant[]
-     */
-    public function getConstants()
-    {
-        return $this->constants;
+        $this->exception = $exception;
     }
 }

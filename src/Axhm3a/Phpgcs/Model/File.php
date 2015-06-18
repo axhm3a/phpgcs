@@ -3,7 +3,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,49 @@
  *  THE SOFTWARE.
  */
 
-namespace Axhm3a\Phpgcs\View;
+namespace Axhm3a\Phpgcs\Model;
 
-
-abstract class View
+class File
 {
+    /**
+     * @var Constant[]
+     */
+    private $constants = array();
+
+    /**
+     * @var string
+     */
+    private $path;
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
     /**
      * @return string
      */
-    abstract public function __toString();
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param Constant[] $constants
+     */
+    public function setConstants($constants)
+    {
+        $this->constants = $constants;
+    }
+
+    /**
+     * @return Constant[]
+     */
+    public function getConstants()
+    {
+        return $this->constants;
+    }
 }

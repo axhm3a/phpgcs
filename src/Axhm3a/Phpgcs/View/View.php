@@ -3,7 +3,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,13 @@
  *  THE SOFTWARE.
  */
 
-require_once realpath(dirname(__FILE__) . '/../SplClassLoader.php');
+namespace Axhm3a\Phpgcs\View;
 
-$loader = new SplClassLoader('Axhm3a',dirname(__FILE__) . '/../');
-$loader->register();
+
+interface View
+{
+    /**
+     * @return string
+     */
+    public function __toString();
+}

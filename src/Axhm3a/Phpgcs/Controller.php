@@ -3,7 +3,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ class Controller
      * @param array $ignoredConstants
      * @return View
      */
-    public function run($path, $showPhpInternalConstants, array $ignoredConstants, array $ignoredPaths)
+    public function execute($path, $showPhpInternalConstants, array $ignoredConstants, array $ignoredPaths)
     {
         try {
             if (empty($path)) {
@@ -80,15 +80,33 @@ class Controller
                 }
             }
 
-            $view = new ConsoleView();
+            $view = $this->createConsoleView();
             $view->setFiles($filesWithConstants);
 
 
         } catch (Exception $e) {
-            $view = new ErrorView();
+            $view = $this->createErrorView();
             $view->setExcpetion($e);
         }
 
+        return $view;
+    }
+
+    /**
+     * @return ConsoleView
+     */
+    protected function createConsoleView()
+    {
+        $view = new ConsoleView();
+        return $view;
+    }
+
+    /**
+     * @return ErrorView
+     */
+    protected function createErrorView()
+    {
+        $view = new ErrorView();
         return $view;
     }
 }

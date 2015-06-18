@@ -3,7 +3,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -26,31 +26,47 @@
 
 namespace Axhm3a\Phpgcs\View;
 
+use Axhm3a\Phpgcs\Model\File;
 
-use Axhm3a\Phpgcs\Exception;
-
-class ErrorView extends View
+class ConsoleView implements  View
 {
     /**
-     * @var Exception
+     * @var File[]
      */
-    private $exception;
+    protected $files;
+
+    /**
+     * @param \Axhm3a\Phpgcs\Model\File[] $files
+     */
+    public function setFiles(array $files)
+    {
+        $this->files = $files;
+    }
 
     /**
      * @return string
      */
     public function __toString()
     {
-        $output =  "Usage: phpgcs PATH [PHP_CONSTANTS 1/0] [IGNORED_CONSTANT,...] [IGNORED_PATH,...]";
-        $output .= "\n\n";
-        $output .= "\033[31m" . $this->exception . "\033[0m";
-        $output .= "\n\n";
+        $output = '';
+
+        $countFiles = 0;
+        $countUsages = 0;
+
+        foreach ($this->files as $file) {
+            $countFiles += 1;
+            $output .= $file->getPath() . "\n";
+
+            foreach ($file->getConstants() as $constant) {
+                $countUsages += 1;
+                $output .= "\t" . $constant->getLine() . ":\t" . $constant->getName() . "\n";
+            }
+        }
+
+        $output .= "\n$countUsages Usage(s) in $countFiles File(s).\n\n";
 
         return $output;
     }
 
-    public function setExcpetion(Exception $exception)
-    {
-        $this->exception = $exception;
-    }
+
 }
