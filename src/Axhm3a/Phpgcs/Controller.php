@@ -39,7 +39,7 @@ class Controller
      * @param array $ignoredConstants
      * @return View
      */
-    public function run($path, $showPhpInternalConstants, array $ignoredConstants, array $ignoredPaths)
+    public function execute($path, $showPhpInternalConstants, array $ignoredConstants, array $ignoredPaths)
     {
         try {
             if (empty($path)) {

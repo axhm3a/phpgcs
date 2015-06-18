@@ -1,9 +1,8 @@
 <?php
-
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,31 +23,24 @@
  *  THE SOFTWARE.
  */
 
-class ControllerTest extends \PHPUnit_Framework_TestCase
+namespace Axhm3a\Phpgcs;
+
+/**
+ * Class Cli
+ * Entrypoint for Cli-Application
+ * @package Axhm3a\Phpgcs
+ */
+class Cli extends Controller
 {
-    /**
-     * @var Axhm3a\Phpgcs\Controller
-     */
-    private $controller;
+    public static function run(array $argv) {
+        $ignoredPaths = array();
+        $controller = new Controller();
 
-    protected function setUp()
-    {
-        $this->controller = new \Axhm3a\Phpgcs\Controller();
-    }
-
-    protected function tearDown()
-    {
-        $this->controller = null;
-    }
-
-    public function testNoPathExcpetionOutput()
-    {
-        $expected = <<<EXPECTED
-[31m[no path specified][0m
-
-
-EXPECTED;
-
-        $this->assertStringEndsWith($expected,(string)$this->controller->execute('', true, array(), array()));
+        $controller->execute(
+            (isset($argv[1]) ? (string)$argv[1] : '') ,
+            (isset($argv[2]) && $argv[2] === '--ignore-builtin'),
+            (isset($argv[3]) ? explode(',', $argv[3]): array()),
+            $ignoredPaths
+        );
     }
 }

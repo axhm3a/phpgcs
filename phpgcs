@@ -4,7 +4,7 @@
 /*
  *  The MIT License (MIT)
  *
- *  Copyright (c) 2013 Daniel Basten <axhm3a@gmail.com>
+ *  Copyright (c) 2015 Daniel Basten <axhm3a@gmail.com>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -27,13 +27,4 @@
 
 require_once('vendor/autoload.php');
 
-
-$ignoredPaths = array();
-
-$controller = new \Axhm3a\Phpgcs\Controller();
-echo $controller->run(
-    (isset($argv[1]) ? (string)$argv[1] : '') ,
-    (isset($argv[2]) && $argv[2] === '--ignore-builtin'),
-    (isset($argv[3]) ? explode(',', $argv[3]): array()),
-    $ignoredPaths
-);
+echo \Axhm3a\Phpgcs\Cli::run($argv);
