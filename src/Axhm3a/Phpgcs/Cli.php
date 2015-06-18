@@ -36,9 +36,9 @@ class Cli extends Controller
     {
         return static::create()->execute(
             (isset($argv[1]) ? (string)$argv[1] : '') ,
-            (isset($argv[2]) && $argv[2] === '--ignore-builtin'),
-            (isset($argv[3]) && strpos($argv[3],'--ignore-const') === 0 ? explode(',', self::getValuesFromParam($argv[3])) : array()),
-            (isset($argv[4]) && strpos($argv[4],'--exclude-paths') === 0 ? explode(',', self::getValuesFromParam($argv[4])): array())
+            self::checkParameter($argv, 2, '--ignore-builtin'),
+            self::checkParameter($argv, 3, '--ignore-const') ? explode(',', self::getValuesFromParam($argv[3])) : array(),
+            self::checkParameter($argv, 4, '--exclude-paths') ? explode(',', self::getValuesFromParam($argv[4])): array()
         );
     }
 
@@ -51,6 +51,7 @@ class Cli extends Controller
         return $controller;
     }
 
+
     /**
      * @param string $parameter
      * @return mixed
@@ -59,5 +60,14 @@ class Cli extends Controller
     {
         $array = explode('=', $parameter);
         return $array[1];
+    }
+
+    /**
+     * @param array $argv
+     * @return bool
+     */
+    protected static function checkParameter(array $argv, $index, $parameterName)
+    {
+        return (isset($argv[$index]) && strpos($argv[$index], $parameterName) === 0);
     }
 }

@@ -80,15 +80,33 @@ class Controller
                 }
             }
 
-            $view = new ConsoleView();
+            $view = $this->createConsoleView();
             $view->setFiles($filesWithConstants);
 
 
         } catch (Exception $e) {
-            $view = new ErrorView();
+            $view = $this->createErrorView();
             $view->setExcpetion($e);
         }
 
+        return $view;
+    }
+
+    /**
+     * @return ConsoleView
+     */
+    protected function createConsoleView()
+    {
+        $view = new ConsoleView();
+        return $view;
+    }
+
+    /**
+     * @return ErrorView
+     */
+    protected function createErrorView()
+    {
+        $view = new ErrorView();
         return $view;
     }
 }

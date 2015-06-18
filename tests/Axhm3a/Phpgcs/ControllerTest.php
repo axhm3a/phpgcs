@@ -27,12 +27,18 @@
 class ControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var \org\bovigo\vfs\vfsStreamDirectory
+     */
+    private $root;
+
+    /**
      * @var Axhm3a\Phpgcs\Controller
      */
     private $controller;
 
     protected function setUp()
     {
+        $this->root = \org\bovigo\vfs\vfsStream::setup();
         $this->controller = new \Axhm3a\Phpgcs\Controller();
     }
 
@@ -50,5 +56,74 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 EXPECTED;
 
         $this->assertStringEndsWith($expected,(string)$this->controller->execute('', true, array(), array()));
+    }
+
+    public function testSingleFileInPath() {
+
+        $this->controller = $this->getMockBuilder(
+            '\Axhm3a\Phpgcs\Controller'
+        )->setMethods(array("createConsoleView"))->getMock();
+
+        $controllerTestViewMock = new ControllerTestViewMock();
+        $this->controller->expects($this->once())
+            ->method("createConsoleView")
+            ->will(
+                $this->returnValue(
+                    $controllerTestViewMock
+                )
+            );
+
+        \org\bovigo\vfs\vfsStream::newFile('example.php')
+            ->withContent('<?php "dd";')
+            ->at($this->root);
+
+        $this->controller->execute($this->root->url(), false, array(), array());
+
+        $this->assertEmpty($controllerTestViewMock->getFiles());
+    }
+
+    public function testMultipleFilesInPath() {
+
+        $this->controller = $this->getMockBuilder(
+            '\Axhm3a\Phpgcs\Controller'
+        )->setMethods(array("createConsoleView"))->getMock();
+
+        $controllerTestViewMock = new ControllerTestViewMock();
+        $this->controller->expects($this->once())
+            ->method("createConsoleView")
+            ->will(
+                $this->returnValue(
+                    $controllerTestViewMock
+                )
+            );
+
+        \org\bovigo\vfs\vfsStream::newFile('example.php')
+            ->withContent('<?php echo "dd";')
+            ->at($this->root);
+
+        \org\bovigo\vfs\vfsStream::newFile('example2.php')
+            ->withContent('<?php echo "dd";')
+            ->at($this->root);
+
+        \org\bovigo\vfs\vfsStream::newFile('example3.php')
+            ->withContent('<?php echo PHP_EOL;')
+            ->at($this->root);
+
+        $this->controller->execute($this->root->url(), false, array(), array());
+
+        $files = $controllerTestViewMock->getFiles();
+
+        $this->assertEquals("vfs://root/example3.php", $files[0]->getPath());
+    }
+}
+
+class ControllerTestViewMock extends \Axhm3a\Phpgcs\View\ConsoleView
+{
+    /**
+     * @return \Axhm3a\Phpgcs\Model\File[]
+     */
+    public function getFiles()
+    {
+        return $this->files;
     }
 }

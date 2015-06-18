@@ -33,7 +33,7 @@ class ConsoleView implements  View
     /**
      * @var File[]
      */
-    private $files;
+    protected $files;
 
     /**
      * @param \Axhm3a\Phpgcs\Model\File[] $files
