@@ -49,7 +49,7 @@ class ErrorView implements View
         $output .= "\t--ignore-const=CONST1,CONST2,...";
         $output .= "\n--exclude-path\n";
         $output .= "\tlist of path patterns to be excluded\n";
-        $output .= "\t--exclude-path=.phtml,tests/,...";
+        $output .= "\t--exclude-paths=.phtml,tests/,...";
         $output .= "\n\n";
         $output .= "\033[31m" . $this->exception . "\033[0m";
         $output .= "\n\n";

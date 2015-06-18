@@ -34,14 +34,20 @@ class Cli extends Controller
 {
     public static function run(array $argv)
     {
-        $ignoredPaths = array();
-        $controller = new Controller();
-
-        $controller->execute(
+        return static::create()->execute(
             (isset($argv[1]) ? (string)$argv[1] : '') ,
             (isset($argv[2]) && $argv[2] === '--ignore-builtin'),
-            (isset($argv[3]) ? explode(',', $argv[3]): array()),
-            $ignoredPaths
+            (isset($argv[3]) && strpos($argv[3],'--ignore-const') === 0 ? explode(',', explode('=', $argv[3])[1]): array()),
+            (isset($argv[4]) && strpos($argv[4],'--exclude-paths') === 0 ? explode(',', explode('=', $argv[4])[1]): array())
         );
+    }
+
+    /**
+     * @return Controller
+     */
+    protected static function create()
+    {
+        $controller = new Controller();
+        return $controller;
     }
 }
