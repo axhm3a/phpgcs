@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/axhm3a/phpgcs.png?branch=master)](https://travis-ci.org/axhm3a/phpgcs)
+[![Latest Stable Version](https://poser.pugx.org/axhm3a/phpgcs/version)](https://packagist.org/packages/axhm3a/phpgcs)
+[![License](https://poser.pugx.org/axhm3a/phpgcs/license)](https://packagist.org/packages/axhm3a/phpgcs)
 
 phpgcs
 ======
